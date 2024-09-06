@@ -9,7 +9,7 @@ pub use constants::*;
 pub use instructions::*;
 pub use state::*;
 
-declare_id!("5LonPY5Qzt8c9qaSLtJhF5hxvgyPveKNs4eUgrYbuAjh");
+declare_id!("FeWGbNukxLxUcNwMkX9GDcRqX95zWkCgutvAyFFnycka");
 
 #[program]
 pub mod soladz {
@@ -30,4 +30,21 @@ pub mod soladz {
     pub fn reward_view (ctx: Context<RewardView>) -> Result<u64> {
         reward_view_handler(ctx)
     }
+
+    pub fn change_owner (ctx: Context<ChangeOwner>) -> Result<()> {
+        change_owner_handler(ctx)
+    }
+
+    pub fn claim (ctx: Context<Claim>) -> Result<()> {
+        claim_handler(ctx)
+    }
+
+    pub fn investor_withdraw(ctx: Context<InvestorWithdraw>, lamports: u64) -> Result<()> {
+        investor_withdraw_handler(ctx, lamports)
+    }
+
+    pub fn open_new_cycle (ctx: Context<OpenNewCycle>) -> Result<()> {
+        open_new_cycle_handler(ctx)
+    }
+
 }

@@ -74,7 +74,9 @@ pub fn invest_handler(ctx: Context<Invest>, lamports: u64) -> Result<()> {
     if investor_account.amount == 0 {
         ctx.accounts.app_stats.investor_count += 1;
         investor_account.amount = lamports - admin_fee;
-        investor_account.referrer = ctx.accounts.referrer.key();
+        if ctx.accounts.investor.key() != ctx.accounts.referrer.key() {
+            investor_account.referrer = ctx.accounts.referrer.key();
+        }
         investor_account.current_cycle = 1;
     } else {
         investor_account.amount += lamports - admin_fee;

@@ -14,8 +14,9 @@ pub struct Investor {
 
 impl Investor {
   pub fn calculate_reward(&self) -> u64 {
-    let percentage: u64 = self.get_reward_percentage();
-    let reward: u64 = self.amount * percentage / 100_u64;
+    // let percentage: u64 = self.get_reward_percentage();
+    let now: i64 = Clock::get().unwrap().unix_timestamp;
+    let reward: u64 = self.amount * (now - self.last_update) as u64 / 86400_u64 / 100_u64;
     return reward;
   }
 
