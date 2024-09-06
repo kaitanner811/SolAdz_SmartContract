@@ -8,4 +8,6 @@ pub enum ErrorCode {
     InsufficientBalance,
     #[msg("Can not reach new cycle")]
     CantReachNewCycle,
+    #[msg("Reached max level")]
+    ReachedMaxLevel
 }
