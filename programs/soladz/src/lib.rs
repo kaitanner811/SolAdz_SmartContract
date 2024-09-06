@@ -47,4 +47,8 @@ pub mod soladz {
         open_new_cycle_handler(ctx)
     }
 
+    pub fn add_admin (ctx:Context<AddAdmin>) -> Result<()> {
+        add_admin_handler(ctx)
+    }
+
 }
