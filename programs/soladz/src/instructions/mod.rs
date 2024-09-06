@@ -6,6 +6,7 @@ pub mod claim;
 pub mod investor_withdraw;
 pub mod change_owner;
 pub mod open_new_cycle;
+pub mod init_investor_with_ref;
 
 pub use initialize::*;
 pub use invest::*;
@@ -15,3 +16,4 @@ pub use claim::*;
 pub use investor_withdraw::*;
 pub use change_owner::*;
 pub use open_new_cycle::*;
+pub use init_investor_with_ref::*;
