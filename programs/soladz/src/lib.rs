@@ -51,4 +51,7 @@ pub mod soladz {
         add_admin_handler(ctx)
     }
 
+    pub fn remove_admin (ctx:Context<RemoveAdmin>) -> Result<()> {
+        remove_admin_handler(ctx)
+    }
 }
