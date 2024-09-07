@@ -15,7 +15,7 @@ pub struct ChangeOwner<'info> {
     )]
     pub app_stats: Box<Account<'info, AppStats>>,
 
-    pub new_owner: Signer<'info>
+    pub new_owner: SystemAccount<'info>
 }
 
 pub fn change_owner_handler(ctx: Context<ChangeOwner>) -> Result<()> {
