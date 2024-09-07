@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
-
-use crate::{AppStats, Investor, APP_STATS_SEED, INVESTOR_SEED};
+use std::mem::size_of;
+use crate::{ Admins, AppStats, ADMIN_SEED, APP_STATS_SEED };
 
 #[derive(Accounts)]
 pub struct AddAdmin<'info> {
@@ -18,15 +18,18 @@ pub struct AddAdmin<'info> {
     pub admin: SystemAccount<'info>,
 
     #[account(
-      mut,
-      seeds = [INVESTOR_SEED, admin.key().as_ref()],
-      bump
+        init_if_needed,
+        payer = owner,
+        space = size_of::<Admins>() + 8,
+        seeds = [ADMIN_SEED],
+        bump
     )]
-    pub admin_account: Box<Account<'info, Investor>>,
+    pub admins: Box<Account<'info, Admins>>,
+    pub system_program: Program<'info, System>,
 }
 
-
-pub fn add_admin_handler(ctx:Context<AddAdmin>) -> Result<()> {
-  ctx.accounts.admin_account.is_admin = true;
-  Ok(())
+pub fn add_admin_handler(ctx: Context<AddAdmin>) -> Result<()> {
+    let admins: &mut Box<Account<'_, Admins>> = &mut ctx.accounts.admins;
+    admins.admin_accounts.push(ctx.accounts.admin.key());
+    Ok(())
 }

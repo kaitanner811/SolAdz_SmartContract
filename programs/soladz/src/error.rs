@@ -9,5 +9,7 @@ pub enum ErrorCode {
     #[msg("Can not reach new cycle")]
     CantReachNewCycle,
     #[msg("Reached max level")]
-    ReachedMaxLevel
+    ReachedMaxLevel,
+    #[msg("Invalid fee Account")]
+    InvalidFeeAccount
 }
