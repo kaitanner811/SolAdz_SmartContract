@@ -49,4 +49,8 @@ pub mod soladz {
     ) -> Result<()>  {
         claim_direct_commision_handler(ctx, lamports)
     }
+
+    pub fn transfer_ownership (ctx: Context<TransferOwnership>) -> Result<()> {
+        transfer_ownership_handler(ctx)
+    }
 }

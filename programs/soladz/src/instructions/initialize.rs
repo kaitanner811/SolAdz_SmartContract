@@ -25,5 +25,6 @@ pub fn handler(ctx: Context<Initialize>) -> Result<()> {
     app_stats.whale_pool = 0;
     app_stats.investor_count = 0;
     app_stats.total_deposits = 0;
+    app_stats.owner = ctx.accounts.signer.key();
     Ok(())
 }
