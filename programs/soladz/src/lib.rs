@@ -9,7 +9,7 @@ pub use constants::*;
 pub use instructions::*;
 pub use state::*;
 
-declare_id!("FeWGbNukxLxUcNwMkX9GDcRqX95zWkCgutvAyFFnycka");
+declare_id!("4iXMehL5wHLY6wGdsYGaNcD7ukcdotJ9DqB4C3gBiod4");
 
 #[program]
 pub mod soladz {
@@ -31,10 +31,6 @@ pub mod soladz {
         reward_view_handler(ctx)
     }
 
-    pub fn change_owner (ctx: Context<ChangeOwner>) -> Result<()> {
-        change_owner_handler(ctx)
-    }
-
     pub fn claim (ctx: Context<Claim>) -> Result<()> {
         claim_handler(ctx)
     }
@@ -45,10 +41,6 @@ pub mod soladz {
 
     pub fn open_new_cycle (ctx: Context<OpenNewCycle>) -> Result<()> {
         open_new_cycle_handler(ctx)
-    }
-
-    pub fn update_fee_account (ctx: Context<UpdateFeeAccount>) -> Result<()> {
-        update_fee_account_handler(ctx)
     }
 
     pub fn claim_direct_commision (

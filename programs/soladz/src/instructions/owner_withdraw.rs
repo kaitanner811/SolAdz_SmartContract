@@ -1,10 +1,10 @@
 use anchor_lang::{ prelude::*, system_program::{transfer, Transfer} };
 
-use crate::{ AppStats, APP_STATS_SEED, VAULT_SEED };
+use crate::{ AppStats, ADMIN, APP_STATS_SEED, VAULT_SEED };
 
 #[derive(Accounts)]
 pub struct OwnerWithdraw<'info> {
-    #[account(mut)]
+    #[account(mut, address = ADMIN)]
     pub owner: Signer<'info>,
 
     #[account(
@@ -18,7 +18,6 @@ pub struct OwnerWithdraw<'info> {
       mut,
       seeds = [APP_STATS_SEED],
       bump,
-      has_one = owner,
     )]
     pub app_stats: Box<Account<'info, AppStats>>,
 

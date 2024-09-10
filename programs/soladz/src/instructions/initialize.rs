@@ -21,7 +21,9 @@ pub struct Initialize <'info> {
 
 pub fn handler(ctx: Context<Initialize>) -> Result<()> {
     let app_stats: &mut Box<Account<'_, AppStats>> = &mut ctx.accounts.app_stats;
-    app_stats.owner = ctx.accounts.signer.key();
-    app_stats.fee_account = ctx.accounts.signer.key();
+    app_stats.top_sponser_pool = 0;
+    app_stats.whale_pool = 0;
+    app_stats.investor_count = 0;
+    app_stats.total_deposits = 0;
     Ok(())
 }

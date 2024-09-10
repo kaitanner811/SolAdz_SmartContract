@@ -2,7 +2,7 @@ use anchor_lang::{ prelude::*, system_program::{ transfer, Transfer } };
 
 use std::mem::size_of;
 use crate::{
-    error::ErrorCode, AppStats, Investor, APP_STATS_SEED, INVESTOR_SEED, VAULT_SEED
+    error::ErrorCode, AppStats, Investor, ADMIN, APP_STATS_SEED, INVESTOR_SEED, VAULT_SEED
 };
 
 #[derive(Accounts)]
@@ -28,7 +28,7 @@ pub struct Invest<'info> {
 
     #[account(
       mut,
-      address = app_stats.fee_account
+      address = ADMIN
     )]
     pub fee_account: SystemAccount<'info>,
 
