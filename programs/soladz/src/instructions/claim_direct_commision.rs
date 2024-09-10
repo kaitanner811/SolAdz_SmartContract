@@ -1,6 +1,6 @@
 use anchor_lang::{ prelude::*, system_program::{ transfer, Transfer } };
 
-use crate::{ Investor, INVESTOR_SEED, SEVER_SIGNER, VAULT_SEED };
+use crate::{ AppStats, Investor, APP_STATS_SEED, INVESTOR_SEED, SEVER_SIGNER, VAULT_SEED };
 
 #[derive(Accounts)]
 pub struct ClaimDirectCommision<'info> {
@@ -26,6 +26,13 @@ pub struct ClaimDirectCommision<'info> {
     )]
     pub vault: SystemAccount<'info>,
 
+    #[account(
+      mut,
+      seeds = [APP_STATS_SEED],
+      bump
+    )]
+    pub app_stats: Box<Account<'info, AppStats>>,
+
     pub system_program: Program<'info, System>,
 }
 
@@ -47,5 +54,6 @@ pub fn claim_direct_commision_handler(
     let seeds: &[&[u8]] = &[VAULT_SEED, bump];
     let signer_seeds: &[&[&[u8]]; 1] = &[&seeds[..]];
     transfer(ctx.accounts.transfer_context().with_signer(signer_seeds), lamports)?;
+    ctx.accounts.app_stats.total_withdraw += lamports;
     Ok(())
 }

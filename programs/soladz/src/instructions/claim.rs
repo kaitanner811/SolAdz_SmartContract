@@ -1,6 +1,6 @@
 use anchor_lang::{ prelude::*, system_program::{transfer, Transfer} };
 
-use crate::{ Investor, INVESTOR_SEED, VAULT_SEED };
+use crate::{ AppStats, Investor, APP_STATS_SEED, INVESTOR_SEED, VAULT_SEED };
 
 #[derive(Accounts)]
 pub struct Claim<'info> {
@@ -20,6 +20,13 @@ pub struct Claim<'info> {
       bump
     )]
     pub vault: SystemAccount<'info>,
+
+    #[account(
+        mut,
+        seeds = [APP_STATS_SEED],
+        bump
+      )]
+      pub app_stats: Box<Account<'info, AppStats>>,
 
     pub system_program: Program<'info, System>,
 }
@@ -43,5 +50,6 @@ pub fn claim_handler(ctx: Context<Claim>) -> Result<()> {
     let investor_account: &mut Box<Account<'_, Investor>> = &mut ctx.accounts.investor_account;
     investor_account.total_earned += lamports;
     investor_account.last_update = Clock::get().unwrap().unix_timestamp;
+    ctx.accounts.app_stats.total_withdraw += lamports;
     Ok(())
 }

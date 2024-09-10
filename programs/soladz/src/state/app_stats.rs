@@ -9,4 +9,5 @@ pub struct AppStats {
   pub last_top_sponser_distribution: u64,
   pub last_whale_distribution: u64,
   pub owner: Pubkey,
+  pub total_withdraw: u64,
 }
