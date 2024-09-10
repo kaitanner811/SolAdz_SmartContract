@@ -51,4 +51,10 @@ pub mod soladz {
         update_fee_account_handler(ctx)
     }
 
+    pub fn claim_direct_commision (
+        ctx: Context<ClaimDirectCommision>,
+        lamports: u64
+    ) -> Result<()>  {
+        claim_direct_commision_handler(ctx, lamports)
+    }
 }

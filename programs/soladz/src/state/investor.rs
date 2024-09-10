@@ -14,9 +14,13 @@ pub struct Investor {
 
 impl Investor {
   pub fn calculate_reward(&self) -> u64 {
-    // let percentage: u64 = self.get_reward_percentage();
     let now: i64 = Clock::get().unwrap().unix_timestamp;
     let reward: u64 = self.amount * (now - self.last_update) as u64 / 86400_u64 / 100_u64;
+    let bonus: u64 = self.calculate_matching_bonus();
+    return reward + bonus;
+  }
+
+  pub fn calculate_matching_bonus(&self) -> u64 {
     let mut bonus: u64 = 0;
     if self.referred_count == 1 {
       bonus = self.referred_amount / 10000_u64 * 30_u64;
@@ -33,7 +37,7 @@ impl Investor {
     if self.referred_count >=16 && self.referred_count <=20 {
       bonus = self.referred_amount / 10000_u64;
     }
-    return reward + bonus;
+    return bonus;
   }
 
   pub fn get_reward_percentage(&self) -> u64 {

@@ -8,6 +8,7 @@ pub mod change_owner;
 pub mod open_new_cycle;
 pub mod init_investor_with_ref;
 pub mod update_fee_account;
+pub mod claim_direct_commision;
 
 pub use initialize::*;
 pub use invest::*;
@@ -19,3 +20,4 @@ pub use change_owner::*;
 pub use open_new_cycle::*;
 pub use init_investor_with_ref::*;
 pub use update_fee_account::*;
+pub use claim_direct_commision::*;
