@@ -11,5 +11,7 @@ pub enum ErrorCode {
     #[msg("Reached max level")]
     ReachedMaxLevel,
     #[msg("Invalid fee Account")]
-    InvalidFeeAccount
+    InvalidFeeAccount,
+    #[msg("Overflow of max admins")]
+    OverflowMaxAdmin
 }

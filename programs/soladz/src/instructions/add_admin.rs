@@ -1,6 +1,5 @@
 use anchor_lang::prelude::*;
-use std::mem::size_of;
-use crate::{ Admins, AppStats, ADMIN_SEED, APP_STATS_SEED };
+use crate::{ Admins, AppStats, ADMIN_SEED, APP_STATS_SEED, MAX_ADMINS, error::ErrorCode };
 
 #[derive(Accounts)]
 pub struct AddAdmin<'info> {
@@ -20,7 +19,7 @@ pub struct AddAdmin<'info> {
     #[account(
         init_if_needed,
         payer = owner,
-        space = size_of::<Admins>() + 8,
+        space = 32 * 10 + 8,
         seeds = [ADMIN_SEED],
         bump
     )]
@@ -30,6 +29,9 @@ pub struct AddAdmin<'info> {
 
 pub fn add_admin_handler(ctx: Context<AddAdmin>) -> Result<()> {
     let admins: &mut Box<Account<'_, Admins>> = &mut ctx.accounts.admins;
+    if admins.admin_accounts.len() == MAX_ADMINS {
+        return err!(ErrorCode::OverflowMaxAdmin);
+    }
     admins.admin_accounts.push(ctx.accounts.admin.key());
     Ok(())
 }
