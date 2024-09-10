@@ -16,8 +16,7 @@ impl Investor {
   pub fn calculate_reward(&self) -> u64 {
     let now: i64 = Clock::get().unwrap().unix_timestamp;
     let reward: u64 = self.amount * (now - self.last_update) as u64 / 86400_u64 / 100_u64;
-    let bonus: u64 = self.calculate_matching_bonus();
-    return reward + bonus;
+    return reward;
   }
 
   pub fn calculate_matching_bonus(&self) -> u64 {

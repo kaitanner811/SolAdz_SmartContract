@@ -38,7 +38,7 @@ pub fn claim_handler(ctx: Context<Claim>) -> Result<()> {
     let bump: &[u8; 1] = &[ctx.bumps.vault];
     let seeds: &[&[u8]] = &[VAULT_SEED, bump];
     let signer_seeds: &[&[&[u8]]; 1] = &[&seeds[..]];
-    let lamports: u64 = ctx.accounts.investor_account.calculate_reward();
+    let lamports: u64 = ctx.accounts.investor_account.calculate_reward() + ctx.accounts.investor_account.calculate_matching_bonus();
     transfer(ctx.accounts.transfer_context().with_signer(signer_seeds), lamports)?;
     let investor_account: &mut Box<Account<'_, Investor>> = &mut ctx.accounts.investor_account;
     investor_account.total_earned += lamports;
