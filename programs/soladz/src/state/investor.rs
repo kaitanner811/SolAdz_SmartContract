@@ -3,7 +3,6 @@ use anchor_lang::prelude::*;
 #[account]
 pub struct Investor {
   pub investor: Pubkey,
-  pub is_admin: bool,
   pub amount: u64,
   pub last_update: i64,
   pub current_cycle: u8,
@@ -39,7 +38,7 @@ impl Investor {
 
   pub fn get_reward_percentage(&self) -> u64 {
     let now: i64 = Clock::get().unwrap().unix_timestamp;
-    let mut percentage: u64 = (now - self.last_update) as u64 / 86400_u64;
+    let mut percentage: u64 = (now - self.last_update) as u64 / 86400_u64 / 100;
     if percentage > 300 {
       percentage = 300;
     }

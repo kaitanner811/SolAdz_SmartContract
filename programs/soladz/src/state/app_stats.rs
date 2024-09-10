@@ -9,4 +9,5 @@ pub struct AppStats {
   pub total_deposits: u64,
   pub last_top_sponser_distribution: u64,
   pub last_whale_distribution: u64,
+  pub fee_account: Pubkey,
 }

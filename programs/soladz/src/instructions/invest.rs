@@ -2,7 +2,7 @@ use anchor_lang::{ prelude::*, system_program::{ transfer, Transfer } };
 
 use std::mem::size_of;
 use crate::{
-    error::ErrorCode, Admins, AppStats, Investor, ADMIN_SEED, APP_STATS_SEED, INVESTOR_SEED, VAULT_SEED
+    error::ErrorCode, AppStats, Investor, APP_STATS_SEED, INVESTOR_SEED, VAULT_SEED
 };
 
 #[derive(Accounts)]
@@ -28,14 +28,9 @@ pub struct Invest<'info> {
 
     #[account(
       mut,
+      address = app_stats.fee_account
     )]
     pub fee_account: SystemAccount<'info>,
-
-    #[account(
-        seeds=[ADMIN_SEED],
-        bump
-    )]
-    pub admins: Box<Account<'info, Admins>>,
 
     #[account(
       mut,
@@ -69,9 +64,7 @@ pub fn invest_handler(ctx: Context<Invest>, lamports: u64) -> Result<()> {
     if ctx.accounts.investor.lamports() < lamports {
         return err!(ErrorCode::InsufficientBalance);
     }
-    if ctx.accounts.fee_account.key() != ctx.accounts.admins.admin_accounts[0] {
-        return err!(ErrorCode::InvalidFeeAccount);
-    }
+    
     let admin_fee: u64 = (lamports * 5) / 100; // 5% admin fee
     transfer(ctx.accounts.transfer_context(), lamports - admin_fee)?;
     transfer(ctx.accounts.transfer_fee_context(), admin_fee)?;
