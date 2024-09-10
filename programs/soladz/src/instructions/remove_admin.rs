@@ -29,8 +29,11 @@ pub struct RemoveAdmin<'info> {
 }
 
 pub fn remove_admin_handler(ctx: Context<RemoveAdmin>) -> Result<()> {
-  let admins: &mut Box<Account<'_, Admins>> = &mut ctx.accounts.admins;
-  let index = admins.admin_accounts.iter().position(|x| *x == ctx.accounts.admin.key()).unwrap();
-  admins.admin_accounts.remove(index);
+    let admins: &mut Box<Account<'_, Admins>> = &mut ctx.accounts.admins;
+    let index = admins.admin_accounts
+        .iter()
+        .position(|x| *x == ctx.accounts.admin.key())
+        .unwrap();
+    admins.admin_accounts.remove(index);
     Ok(())
 }
