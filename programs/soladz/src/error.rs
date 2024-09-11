@@ -13,5 +13,7 @@ pub enum ErrorCode {
     #[msg("Invalid fee Account")]
     InvalidFeeAccount,
     #[msg("Invalid amount")]
-    InvalidAmount
+    InvalidAmount,
+    #[msg("Arithmatic overflow")]
+    ArithmaticOverflow
 }
