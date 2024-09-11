@@ -1,4 +1,4 @@
-use anchor_lang::{ prelude::*, system_program::{ transfer, Transfer } };
+use anchor_lang::{ prelude::*, solana_program::native_token::sol_to_lamports, system_program::{ transfer, Transfer } };
 
 use std::mem::size_of;
 use crate::{
@@ -72,6 +72,9 @@ impl<'info> InitInvestorWithRef<'info> {
 pub fn init_investor_with_ref(ctx: Context<InitInvestorWithRef>, lamports: u64) -> Result<()> {
     if ctx.accounts.investor.lamports() < lamports {
         return err!(ErrorCode::InsufficientBalance);
+    }
+    if lamports < sol_to_lamports(0.1) || lamports > sol_to_lamports(100_f64){
+        return err!(ErrorCode::InvalidAmount);
     }
     let admin_fee: u64 = (lamports * 5) / 100; // 5% admin fee
     
