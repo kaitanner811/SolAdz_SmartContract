@@ -65,9 +65,7 @@ pub fn invest_handler(ctx: Context<Invest>, lamports: u64) -> Result<()> {
         return err!(ErrorCode::InsufficientBalance);
     }
     let admin_fee: u64 = (lamports * 5) / 100; // 5% admin fee
-    if lamports - admin_fee < 0 {
-        return err!(ErrorCode::InvalidAmount);
-    }
+    
     transfer(ctx.accounts.transfer_context(), lamports - admin_fee)?;
     transfer(ctx.accounts.transfer_fee_context(), admin_fee)?;
     let investor_account: &mut Box<Account<'_, Investor>> = &mut ctx.accounts.investor_account;
