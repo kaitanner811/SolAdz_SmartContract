@@ -61,4 +61,8 @@ pub mod soladz {
     pub fn matching_bonus_view (ctx: Context<MatchingBonusView>) -> Result<u64> {
         matching_bonus_view_handler(ctx)
     }
+
+    pub fn run_distribution (ctx: Context<RunDistribution>, lamports: u64) -> Result<()> {
+        run_distribution_handler(ctx, lamports)
+    }
 }
