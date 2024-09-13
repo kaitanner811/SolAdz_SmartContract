@@ -69,7 +69,7 @@ impl<'info> InitInvestorWithRef<'info> {
     }
 }
 
-pub fn init_investor_with_ref(ctx: Context<InitInvestorWithRef>, lamports: u64) -> Result<()> {
+pub fn init_investor_with_ref_handler(ctx: Context<InitInvestorWithRef>, lamports: u64) -> Result<()> {
     if ctx.accounts.investor.lamports() < lamports {
         return err!(ErrorCode::InsufficientBalance);
     }

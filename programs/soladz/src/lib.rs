@@ -53,4 +53,8 @@ pub mod soladz {
     pub fn transfer_ownership (ctx: Context<TransferOwnership>) -> Result<()> {
         transfer_ownership_handler(ctx)
     }
+
+    pub fn init_investor_with_ref(ctx: Context<InitInvestorWithRef>, lamports: u64) -> Result<()> {
+        init_investor_with_ref_handler(ctx, lamports)
+    }
 }
