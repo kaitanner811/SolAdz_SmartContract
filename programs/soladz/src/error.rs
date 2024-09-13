@@ -15,5 +15,7 @@ pub enum ErrorCode {
     #[msg("Invalid amount")]
     InvalidAmount,
     #[msg("Arithmatic overflow")]
-    ArithmaticOverflow
+    ArithmaticOverflow,
+    #[msg("Invalid Time")]
+    InvalidTime,
 }

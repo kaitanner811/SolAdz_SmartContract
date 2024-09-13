@@ -80,7 +80,9 @@ pub fn invest_handler(ctx: Context<Invest>, lamports: u64) -> Result<()> {
     } else {
         investor_account.amount += lamports - admin_fee;
     }
-    investor_account.last_update = Clock::get().unwrap().unix_timestamp;
+    let now: i64 = Clock::get().unwrap().unix_timestamp;
+    investor_account.last_update = now;
+    investor_account.last_update_commission = now;
     let app_stats: &mut Box<Account<'_, AppStats>> = &mut ctx.accounts.app_stats;
     app_stats.total_deposits = app_stats.total_deposits.checked_add(lamports).unwrap();
     let top_sponsor_fee: u64 = (lamports * 5) / 100; // 5% to top sponsor pool

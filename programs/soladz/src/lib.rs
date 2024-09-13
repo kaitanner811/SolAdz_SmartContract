@@ -9,7 +9,7 @@ pub use constants::*;
 pub use instructions::*;
 pub use state::*;
 
-declare_id!("2j9DGuVfCnVWwgHkhqerYwjym7SXTF7J96npgKd7We8i");
+declare_id!("4x7sKJijVCFmwX5gQ273o1kA2SzDYTwepmTBZuTeTbPV");
 
 #[program]
 pub mod soladz {
@@ -56,5 +56,9 @@ pub mod soladz {
 
     pub fn init_investor_with_ref(ctx: Context<InitInvestorWithRef>, lamports: u64) -> Result<()> {
         init_investor_with_ref_handler(ctx, lamports)
+    }
+
+    pub fn matching_bonus_view (ctx: Context<MatchingBonusView>) -> Result<u64> {
+        matching_bonus_view_handler(ctx)
     }
 }
