@@ -11,6 +11,7 @@ pub struct Investor {
   pub referred_count: u16,
   pub referred_amount: u64,
   pub last_update_commission: i64,
+  pub last_update_whale: i64,
 }
 
 impl Investor {

@@ -18,4 +18,6 @@ pub enum ErrorCode {
     ArithmaticOverflow,
     #[msg("Invalid Time")]
     InvalidTime,
+    #[msg("Invalid whale")]
+    InvalidWhale
 }

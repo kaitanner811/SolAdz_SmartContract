@@ -9,7 +9,7 @@ pub use constants::*;
 pub use instructions::*;
 pub use state::*;
 
-declare_id!("4x7sKJijVCFmwX5gQ273o1kA2SzDYTwepmTBZuTeTbPV");
+declare_id!("Bk8UyhwyA1WwbWzKtrb3cZV4rbfQuutwhXTAPWTPxHSU");
 
 #[program]
 pub mod soladz {
@@ -64,5 +64,9 @@ pub mod soladz {
 
     pub fn run_distribution (ctx: Context<RunDistribution>, lamports: u64) -> Result<()> {
         run_distribution_handler(ctx, lamports)
+    }
+
+    pub fn claim_whale (ctx: Context<ClaimWhale>) -> Result<()> {
+        claim_whale_handler(ctx)
     }
 }

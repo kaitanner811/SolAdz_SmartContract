@@ -45,5 +45,6 @@ pub fn run_distribution_handler(ctx: Context<RunDistribution>, lamports: u64) ->
     let seeds: &[&[u8]] = &[VAULT_SEED, bump];
     let signer_seeds: &[&[&[u8]]; 1] = &[&seeds[..]];
     transfer(ctx.accounts.transfer_context().with_signer(signer_seeds), lamports)?;
+    ctx.accounts.app_stats.top_sponser_pool -= lamports;
     Ok(())
 }

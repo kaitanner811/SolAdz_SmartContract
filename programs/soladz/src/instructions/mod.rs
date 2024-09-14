@@ -10,6 +10,7 @@ pub mod claim_direct_commision;
 pub mod transfer_ownership;
 pub mod matching_bonus_view;
 pub mod run_distribution;
+pub mod claim_whale;
 
 pub use initialize::*;
 pub use invest::*;
@@ -23,3 +24,4 @@ pub use claim_direct_commision::*;
 pub use transfer_ownership::*;
 pub use matching_bonus_view::*;
 pub use run_distribution::*;
+pub use claim_whale::*;
